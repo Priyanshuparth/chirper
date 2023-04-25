@@ -1,6 +1,10 @@
+import 'package:chirper/models/user.dart';
 import 'package:chirper/screens/auth/signup.dart';
+import 'package:chirper/screens/wrapper.dart';
+import 'package:chirper/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,14 +24,10 @@ class MyApp extends StatelessWidget {
           // return SomethingWentWrong();
         }
         if(snapshot.connectionState==ConnectionState.done){
-          return MaterialApp(
-            title: 'Flutter Demo',
-            theme: ThemeData(
-            primarySwatch: Colors.blue,
-            visualDensity: VisualDensity.adaptivePlatformDensity
-          ),
-          home: SignUp(),
-        );
+          return StreamProvider<UserModel>.value(
+            value: AuthService().user,
+            child: MaterialApp(home:Wrapper()),
+          );
         }
         return Text("Loading");
          
