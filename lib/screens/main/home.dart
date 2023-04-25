@@ -1,3 +1,4 @@
+import 'package:chirper/services/auth.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
@@ -5,8 +6,21 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text('Home'),
+    final AuthService _authService=AuthService();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Home"),
+        actions: <Widget>[
+          TextButton.icon(
+            label:Text('SignOut'),
+            style: TextButton.styleFrom(
+    primary: Colors.black, // Text Color
+  ),
+            icon:Icon(Icons.person),
+            onPressed: () async {_authService.signOut();}
+          )
+        ],
+        ),
     );
   }
 }

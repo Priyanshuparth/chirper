@@ -12,6 +12,7 @@ class Wrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     final user = Provider.of<UserModel>(context);
 
+    print(user);
     if(user==null)
     {
       // show auth system routes
