@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "274159494968",
+    "project_id": "chirper-1e678",
+    "storage_bucket": "chirper-1e678.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:274159494968:android:b83353cd8bdcce597043cd",
+        "android_client_info": {
+          "package_name": "com.example.chirper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "274159494968-61i0n4j0tnp6g48pa8mhf4974g6cobf5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.chirper",
+            "certificate_hash": "3b6b51f36c65bda7b1498c257555c5c1e614aeb8"
+          }
+        },
+        {
+          "client_id": "274159494968-0qdug9sqo6q86dckoivbpig7a66m7ag5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOXfJXQb1yZcg33234Jn535zkgISSoJxU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "274159494968-0qdug9sqo6q86dckoivbpig7a66m7ag5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
