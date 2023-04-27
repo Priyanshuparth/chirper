@@ -6,25 +6,38 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AuthService _authService=AuthService();
+    final AuthService _authService = AuthService();
     return Scaffold(
       appBar: AppBar(
         title: Text("Home"),
-        actions: <Widget>[
-          TextButton.icon(
-            label:Text('SignOut'),
-            style: TextButton.styleFrom(
-    primary: Colors.black, // Text Color
-  ),
-            icon:Icon(Icons.person),
-            onPressed: () async {_authService.signOut();}
-          )
-        ],
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: (){Navigator.pushNamed(context, '/add');},
-          child: Icon(Icons.add),
-        ),
-    );
+        
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/add');
+        },
+        child: Icon(Icons.add)),
+        drawer: Drawer(
+            child: ListView(
+          children: <Widget>[
+            DrawerHeader(
+              child: Text('drawer header'),
+              decoration: BoxDecoration(color: Colors.blue),
+            ),
+            ListTile(
+              title: Text('Profile'),
+              onTap: () {
+                Navigator.pushNamed(context, '/profile');
+              },
+            ),
+            ListTile(
+              title: Text('logout'),
+              onTap: () async {
+                _authService.signOut();
+              },
+            ),
+          ],
+        )),
+      );
   }
 }
