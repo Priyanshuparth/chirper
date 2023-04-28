@@ -1,21 +1,21 @@
 import 'package:chirper/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class AuthService{
+class AuthService {
   FirebaseAuth auth = FirebaseAuth.instance;
 
-
-  UserModel? _userFromFirebaseUser(User user) {
+  UserModel _userFromFirebaseUser(User user) {
     return user != null ? UserModel(id: user.uid) : null;
   }
 
-  Stream<UserModel?> get user {
+  Stream<UserModel> get user {
     return auth.authStateChanges().map(_userFromFirebaseUser);
   }
 
-  Future signUp(email,password) async {
+  Future signUp(email, password) async {
     try {
-      User user = (await auth.createUserWithEmailAndPassword(email: email, password: password)) as User;
+      User user = (await auth.createUserWithEmailAndPassword(
+          email: email, password: password)) as User;
 
       _userFromFirebaseUser(user);
     } on FirebaseAuthException catch (e) {
@@ -28,9 +28,11 @@ class AuthService{
       print(e);
     }
   }
-  Future signIn(email,password) async {
+
+  Future signIn(email, password) async {
     try {
-      User user = (await auth.signInWithEmailAndPassword(email: email, password: password)) as User;
+      User user = (await auth.signInWithEmailAndPassword(
+          email: email, password: password)) as User;
 
       _userFromFirebaseUser(user);
     } on FirebaseAuthException catch (e) {
@@ -40,10 +42,10 @@ class AuthService{
     }
   }
 
-  Future signOut() async{
-    try{
+  Future signOut() async {
+    try {
       return await auth.signOut();
-    }catch(e){
+    } catch (e) {
       print(e.toString());
       return null;
     }
