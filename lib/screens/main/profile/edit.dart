@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:chirper/services/user.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -11,6 +12,7 @@ class Edit extends StatefulWidget {
 }
 
 class _EditState extends State<Edit> {
+  UserService _userService = UserService();
   File? _proflieImage;
   File? _bannerImage;
 
@@ -33,7 +35,10 @@ class _EditState extends State<Edit> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(actions: [
-        ElevatedButton(onPressed: null, child: Text('Save'))
+        ElevatedButton(onPressed: () async{
+          await _userService.updateProfile(_bannerImage!, _proflieImage!, name);
+          Navigator.pop(context);
+        }, child: Text('Save'))
       ],),
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 20,horizontal: 50),
