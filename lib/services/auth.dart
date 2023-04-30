@@ -1,4 +1,5 @@
 import 'package:chirper/models/user.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
@@ -16,10 +17,15 @@ class AuthService {
 
   Future signUp(email, password) async {
     try {
-      User user = (await auth.createUserWithEmailAndPassword(
-          email: email, password: password)) as User;
+      UserCredential user = await auth.createUserWithEmailAndPassword(
+          email: email, password: password);
 
-      _userFromFirebaseUser(user);
+
+      await FirebaseFirestore.instance.
+      collection('users')
+      .doc(user.user.uid)
+      .set({'name':email,'email':email});
+      _userFromFirebaseUser(user.user);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');

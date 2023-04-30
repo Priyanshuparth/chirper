@@ -31,6 +31,12 @@ class Home extends StatelessWidget {
               },
             ),
             ListTile(
+              title: Text('Edit'),
+              onTap: () {
+                Navigator.pushNamed(context, '/edit');
+              },
+            ),
+            ListTile(
               title: Text('logout'),
               onTap: () async {
                 _authService.signOut();
