@@ -4,11 +4,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 class AuthService {
   FirebaseAuth auth = FirebaseAuth.instance;
 
-  UserModel _userFromFirebaseUser(User user) {
+  UserModel? _userFromFirebaseUser(User? user) {
+    // ignore: unnecessary_null_comparison
     return user != null ? UserModel(id: user.uid) : null;
   }
 
-  Stream<UserModel> get user {
+  
+  Stream<UserModel?> get user {
     return auth.authStateChanges().map(_userFromFirebaseUser);
   }
 

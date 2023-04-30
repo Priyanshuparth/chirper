@@ -16,7 +16,7 @@ class _ListPostsState extends State<ListPosts> {
       itemCount: posts.length,
       itemBuilder: (context,index){
         final post = posts[index];
-        return ListTitle(
+        return ListTile(
           title:Text(post.creator),
           subtitle:Text(post.text),
         );
