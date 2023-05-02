@@ -1,12 +1,29 @@
 import 'dart:collection';
 import 'dart:io';
 
+import 'package:chirper/models/user.dart';
 import 'package:chirper/services/utils.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class UserService {
   UtilsService _utilsService = UtilsService();
+
+  UserModel? _userFromFirebaseSnapshot(DocumentSnapshot snapshot){
+    return snapshot !=null ?
+      UserModel(id: snapshot.id,
+        name:snapshot.data()['name'],
+        profileImageUrl:snapshot.data()['profileImageUrl'],
+        bannerImageUrl:snapshot.data()['bannerImageUrl'],
+        email:snapshot.data()['email'],
+      )
+      : null ;
+  }
+
+  Stream<UserModel?> getUserInfo(uid){
+    return FirebaseFirestore.instance.collection("users").doc(uid).snapshots().map(_userFromFirebaseSnapshot);
+  }
+
   Future<void> updateProfile(
       File _bannerImage, File _proflieImage, String name) async {
     String bannerImageUrl = '';
