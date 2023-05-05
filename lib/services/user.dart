@@ -5,6 +5,7 @@ import 'package:chirper/models/user.dart';
 import 'package:chirper/services/utils.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class UserService {
   UtilsService _utilsService = UtilsService();
@@ -47,6 +48,52 @@ class UserService {
     .limit(10)
     .snapshots()
     .map(_userListFromQuerySnapshot);
+  }
+
+  Stream<bool> isFollowing(uid,otherId){
+    return FirebaseFirestore.instance
+    .collection("users")
+    .doc(uid!)
+    .collection("following")
+    .doc(otherId!)
+    .snapshots()
+    .map((snapshot ){
+      return snapshot.exists!;
+    });
+  }
+
+  Future<void> followUser(uid) async{
+    await FirebaseFirestore.instance
+    .collection('Users')
+    .doc(FirebaseAuth.instance.currentUser.uid!)
+    .collection('following')
+    .doc(uid!)
+    .set({});
+
+
+    await FirebaseFirestore.instance
+    .collection('Users')
+    .doc(uid!)
+    .collection('followers')
+    .doc(FirebaseAuth.instance.currentUser.uid!)
+    .set({});
+  }
+
+  Future<void> unfollowUser(uid) async{
+    await FirebaseFirestore.instance
+    .collection('Users')
+    .doc(FirebaseAuth.instance.currentUser.uid!)
+    .collection('following')
+    .doc(uid!)
+    .delete();
+
+
+    await FirebaseFirestore.instance
+    .collection('Users')
+    .doc(uid!)
+    .collection('followers')
+    .doc(FirebaseAuth.instance.currentUser.uid!)
+    .delete();
   }
 
   Future<void> updateProfile(
