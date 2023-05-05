@@ -1,6 +1,7 @@
 import 'package:chirper/screens/home/search.dart';
 import 'package:chirper/screens/home/feed.dart';
 import 'package:chirper/services/auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -45,7 +46,7 @@ class _HomeState extends State<Home> {
           ListTile(
             title: Text('Profile'),
             onTap: () {
-              Navigator.pushNamed(context, '/profile');
+              Navigator.pushNamed(context, '/profile',arguments: FirebaseAuth.instance.currentUser.uid);
             },
           ),
           ListTile(
