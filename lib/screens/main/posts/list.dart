@@ -1,4 +1,5 @@
 import 'package:chirper/models/post.dart';
+import 'package:chirper/services/user.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 class ListPosts extends StatefulWidget {
@@ -9,6 +10,7 @@ class ListPosts extends StatefulWidget {
 }
 
 class _ListPostsState extends State<ListPosts> {
+
   @override
   Widget build(BuildContext context) {
   final posts = Provider.of<List<PostModel>>(context) ?? [];
