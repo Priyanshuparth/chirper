@@ -16,6 +16,7 @@ class PostService {
         text: doc.data()['text'] ?? '',
         creator: doc.data()['creator'] ?? '',
         timestamp: doc.data()['timestamp'] ?? 0,
+        likesCount: doc.data()['likesCount'] ?? 0,
       );
     }).toList();
   }
@@ -25,6 +26,39 @@ class PostService {
       'text': text,
       'creator': FirebaseAuth.instance.currentUser.uid,
       'timestamp': FieldValue.serverTimestamp()
+    });
+  }
+
+  Future likePost(PostModel post, bool current) async {
+    if (current) {
+      post.likesCount = post.likesCount -1;
+      await FirebaseFirestore.instance
+          .collection("posts")
+          .doc(post.id)
+          .collection("likes")
+          .doc(FirebaseAuth.instance.currentUser.uid)
+          .delete();
+    }
+    if (!current) {
+      post.likesCount = post.likesCount +1;
+      await FirebaseFirestore.instance
+          .collection("posts")
+          .doc(post.id)
+          .collection("likes")
+          .doc(FirebaseAuth.instance.currentUser.uid)
+          .set({});
+    }
+  }
+
+  Stream<bool> getCurrentUserLike(PostModel post) {
+    return FirebaseFirestore.instance
+        .collection("posts")
+        .doc(post.id)
+        .collection("likes")
+        .doc(FirebaseAuth.instance.currentUser.uid)
+        .snapshots()
+        .map((snapshot) {
+      return snapshot.exists;
     });
   }
 
@@ -43,21 +77,20 @@ class PostService {
     //final splitUsersFollowing = partition<dynamic>(usersFollowing,10);
     //debugPrint(splitUsersFollowing as String?);
 
-    List<PostModel> feedList=[];
+    List<PostModel> feedList = [];
     //for(int i=0;i<splitUsersFollowing.length;i++){
-      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-          .collection('posts')
-          //.where('creator',whereIn: splitUsersFollowing.elementAt(i))
-          .orderBy('timestamp',descending: true)
-          .get();
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('posts')
+        //.where('creator',whereIn: splitUsersFollowing.elementAt(i))
+        .orderBy('timestamp', descending: true)
+        .get();
 
-
-          feedList.addAll(_postListFromSnapshot(querySnapshot));
+    feedList.addAll(_postListFromSnapshot(querySnapshot));
     //}
 
-    feedList.sort((a,b) {
-      var adate=a.timestamp;
-      var bdate=b.timestamp;
+    feedList.sort((a, b) {
+      var adate = a.timestamp;
+      var bdate = b.timestamp;
       return bdate.compareTo(adate);
     });
     return feedList;

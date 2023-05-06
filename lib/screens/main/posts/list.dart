@@ -1,5 +1,6 @@
 import 'package:chirper/models/post.dart';
 import 'package:chirper/models/user.dart';
+import 'package:chirper/services/posts.dart';
 import 'package:chirper/services/user.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,6 +13,7 @@ class ListPosts extends StatefulWidget {
 
 class _ListPostsState extends State<ListPosts> {
   UserService _userService =UserService();
+  PostService _postService= PostService();
   @override
   Widget build(BuildContext context) {
   final posts = Provider.of<List<PostModel>>(context) ?? [];
@@ -22,20 +24,31 @@ class _ListPostsState extends State<ListPosts> {
         final post = posts[index];
         return StreamBuilder(
           stream: _userService.getUserInfo(post.creator),
-          builder: (BuildContext context,AsyncSnapshot<UserModel?> snapshot){
-          if(!snapshot.hasData){
+          builder: (BuildContext context,AsyncSnapshot<UserModel?> snapshotUser){
+          if(!snapshotUser.hasData){
             return Center(child: CircularProgressIndicator(),);
           }
+
+          // stream builder to get user like 
+
+          return StreamBuilder(
+          stream: _postService.getCurrentUserLike(post),
+          builder: (BuildContext context,AsyncSnapshot<bool> snapshotLike){
+          if(!snapshotLike.hasData){
+            return Center(child: CircularProgressIndicator(),);
+          }
+
+          // stream builder to get user like 
           return ListTile(
           title:Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
           child: Row(children: [
-            snapshot.data?.profileImageUrl !='' ?
+            snapshotUser.data?.profileImageUrl !='' ?
             CircleAvatar(radius: 20,
-            backgroundImage: NetworkImage(snapshot.data!.profileImageUrl!))
+            backgroundImage: NetworkImage(snapshotUser.data!.profileImageUrl!))
             :
             Icon(Icons.person,size: 40 ),
             SizedBox(width: 10),
-            Text(snapshot.data!.name!)
+            Text(snapshotUser.data!.name!)
           ],
           ),
           ),
@@ -48,7 +61,15 @@ class _ListPostsState extends State<ListPosts> {
                 children: [
                   Text(post.text),
                   SizedBox(height: 20),
-                  Text(post.timestamp.toDate().toString())
+                  Text(post.timestamp.toDate().toString()),
+                  SizedBox(height: 20),
+                  IconButton(icon: new Icon(
+                    snapshotLike.data! ?
+                    Icons.favorite:Icons.favorite_border,color: Colors.blue,size: 30.0,),
+                  onPressed: () {
+                    _postService.likePost(post, snapshotLike.data!);
+                    }),
+                    Text(post.likesCount.toString())
                 ],
               ),
               
@@ -58,6 +79,7 @@ class _ListPostsState extends State<ListPosts> {
             ],
           ),
         );
+          });
         });
         
       },
