@@ -1,8 +1,10 @@
+import 'package:chirper/constants/assets_constants.dart';
 import 'package:chirper/screens/home/search.dart';
 import 'package:chirper/screens/home/feed.dart';
 import 'package:chirper/services/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -40,7 +42,7 @@ class _HomeState extends State<Home> {
           child: ListView(
         children: <Widget>[
           DrawerHeader(
-            child: Text('drawer header'),
+            child:SvgPicture.asset(AssetsConstants.twitterLogo),
             decoration: BoxDecoration(color: Colors.blue),
           ),
           ListTile(
