@@ -18,6 +18,7 @@ class _EditState extends State<Edit> {
 
   final picker =ImagePicker();
   String name='';
+  String bio='';
 
   Future getImage(int type) async{
     final pickedFile=await picker.getImage(source: ImageSource.camera);
@@ -45,7 +46,7 @@ class _EditState extends State<Edit> {
         child: new Form(
           child: Column(
             children: [
-              ElevatedButton(
+              TextButton(
                 onPressed: ()=>getImage(0),
                 child: _proflieImage==null ?
                   Icon(Icons.person) :
@@ -54,7 +55,7 @@ class _EditState extends State<Edit> {
                     height: 100,
                     ),
                 ),
-              ElevatedButton(
+              TextButton(
                 onPressed: ()=>getImage(1),
                 child: _bannerImage==null ?
                   Icon(Icons.person) :
