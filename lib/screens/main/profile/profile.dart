@@ -103,10 +103,11 @@ class _ProfileState extends State<Profile> {
                                 ),
                               ),
                             ),
-                          )
+                          ),
                         ],
                       ),
-                    )
+                    ),
+                        const Divider(thickness: 1,),
                   ]))
                 ];
               },
