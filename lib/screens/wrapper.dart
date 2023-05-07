@@ -2,6 +2,7 @@ import 'package:chirper/models/user.dart';
 import 'package:chirper/screens/auth/signup.dart';
 import 'package:chirper/screens/main/home.dart';
 import 'package:chirper/screens/main/posts/add.dart';
+import 'package:chirper/screens/main/posts/replies.dart';
 import 'package:chirper/screens/main/profile/edit.dart';
 import 'package:chirper/screens/main/profile/profile.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +30,7 @@ class Wrapper extends StatelessWidget {
         '/add':(context)=>Add(),
         '/profile':(context)=>Profile(),
         '/edit':(context)=>Edit(),
+        '/replies':(context)=>Replies()
       },
     );
     // show main system routes
