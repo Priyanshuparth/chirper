@@ -1,41 +1,34 @@
 {
   "project_info": {
-    "project_number": "274159494968",
-    "project_id": "chirper-1e678",
-    "storage_bucket": "chirper-1e678.appspot.com"
+    "project_number": "328534142179",
+    "firebase_url": "https://chirper-12af4-default-rtdb.firebaseio.com",
+    "project_id": "chirper-12af4",
+    "storage_bucket": "chirper-12af4.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:274159494968:android:b83353cd8bdcce597043cd",
+        "mobilesdk_app_id": "1:328534142179:android:bed38b8ce21d8d08d729d6",
         "android_client_info": {
           "package_name": "com.example.chirper"
         }
       },
       "oauth_client": [
         {
-          "client_id": "274159494968-61i0n4j0tnp6g48pa8mhf4974g6cobf5.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.chirper",
-            "certificate_hash": "3b6b51f36c65bda7b1498c257555c5c1e614aeb8"
-          }
-        },
-        {
-          "client_id": "274159494968-0qdug9sqo6q86dckoivbpig7a66m7ag5.apps.googleusercontent.com",
+          "client_id": "328534142179-l421p51dm7i81pli12mbdgpo4redm55i.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBOXfJXQb1yZcg33234Jn535zkgISSoJxU"
+          "current_key": "AIzaSyDbv75xvVwwYQufjgsFoQSbocSXIVIjHvA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "274159494968-0qdug9sqo6q86dckoivbpig7a66m7ag5.apps.googleusercontent.com",
+              "client_id": "328534142179-l421p51dm7i81pli12mbdgpo4redm55i.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

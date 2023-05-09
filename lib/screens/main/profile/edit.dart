@@ -18,7 +18,6 @@ class _EditState extends State<Edit> {
 
   final picker =ImagePicker();
   String name='';
-  String bio='';
 
   Future getImage(int type) async{
     final pickedFile=await picker.getImage(source: ImageSource.camera);
