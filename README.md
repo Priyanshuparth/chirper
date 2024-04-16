@@ -1,5 +1,12 @@
 # Chirper
 
+![GitHub repo size](https://img.shields.io/github/repo-size/Priyanshuparth/chirper)
+![GitHub contributors](https://img.shields.io/github/contributors/Priyanshuparth/chirper)
+![GitHub stars](https://img.shields.io/github/stars/Priyanshuparth/chirper?style=social)
+![GitHub forks](https://img.shields.io/github/forks/Priyanshuparth/chirper?style=social)
+[![Instagram Follow](https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white)](https://instagram.com/priyanshuparth) 
+[![LinkedIn Follow](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/priyanshuparth) 
+
 Chirper is a Twitter clone developed using Flutter and Firebase. The project aims to replicate the core features of the popular social media platform, Twitter, while also addressing some of its limitations and challenges.
 
 ## Introduction
